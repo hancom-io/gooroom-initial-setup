@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/kr/gooroom/initial-setup/pages/summary">
+    <file preprocess="xml-stripblanks">gis-summary-page.ui</file>
+    <file preprocess="xml-stripblanks">splash-window.ui</file>
+    <file alias="success-image">success-image.svg</file>
+  </gresource>
+</gresources>
+

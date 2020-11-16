@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <template class="GisEulasPage" parent="GisPage">
+  <child>
+  <object class="GtkBox" id="box">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
+    <property name="spacing">12</property>
+    <child>
+      <object class="GtkScrolledWindow" id="scrolled_window">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="shadow_type">etched-in</property>
+        <child>
+          <object class="GtkTextView" id="text_view">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="editable">False</property>
+            <property name="wrap_mode">word</property>
+            <property name="cursor_visible">False</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="checkbox">
+        <property name="can_focus">False</property>
+        <property name="receives_default">False</property>
+        <property name="use_underline">True</property>
+        <property name="draw_indicator">True</property>
+        <child>
+          <object class="GtkLabel" id="agreement_label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">I have _agreed to the terms and conditions in this end user license agreement.</property>
+            <property name="wrap">True</property>
+            <property name="wrap_mode">word</property>
+            <property name="ellipsize">end</property>
+            <property name="width_chars">0</property>
+            <property name="max_width_chars">0</property>
+            <property name="lines">1</property>
+            <property name="xalign">0</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+  </object>
+  </child>
+  </template>
+</interface>

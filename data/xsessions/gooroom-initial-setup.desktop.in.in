@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=GOOROOM Initial Setup
+Exec=@libexecdir@/gooroom-initial-setup-proxy
+Type=Application

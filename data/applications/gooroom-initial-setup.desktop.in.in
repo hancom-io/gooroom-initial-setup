@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Gooroom Initial Setup
+Icon=preferences-system
+Exec=@libexecdir@/gooroom-initial-setup
+Terminal=false
+Type=Application
+StartupNotify=true
+NoDisplay=true

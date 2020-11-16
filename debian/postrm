@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "purge" ] ; then
+        if getent passwd gis >/dev/null; then
+                if which userdel >/dev/null 2>&1; then
+                        userdel -rf gis || echo "Could not remove gooroom-initial-setup user."
+                fi
+        fi
+fi
+
+exit 0

@@ -1,0 +1,29 @@
+Source: gooroom-initial-setup
+Section: x11
+Priority: optional
+Maintainer: Gooroom Maintainers <gooroom@gooroom.kr>
+Build-Depends: debhelper (>= 9),
+               pkg-config,
+               libgtk-3-dev,
+               intltool,
+               autotools-dev,
+               libglib2.0-dev,
+               libpango1.0-dev,
+               libnm-dev (>= 1.2),
+               libnma-dev (>= 1.0),
+               libgoa-1.0-dev,
+               libgoa-backend-1.0-dev,
+               libfontconfig1-dev,
+               libpwquality-dev,
+               libsecret-1-dev,
+               libgnome-desktop-3-dev (>= 3.7.5),
+Standards-Version: 3.9.8
+
+Package: gooroom-initial-setup
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         gnome-keyring,
+         adduser,
+         gnome-online-accounts (>= 3.25.3)
+Description: Initial Gooroom system setup helper

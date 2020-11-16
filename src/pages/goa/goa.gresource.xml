@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/kr/gooroom/initial-setup/pages/goa">
+    <file preprocess="xml-stripblanks">gis-goa-page.ui</file>
+    <file alias="error-image">error-image.svg</file>
+  </gresource>
+</gresources>
+

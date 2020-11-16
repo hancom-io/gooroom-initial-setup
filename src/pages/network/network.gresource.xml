@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/kr/gooroom/initial-setup/pages/network">
+    <file preprocess="xml-stripblanks">gis-network-page.ui</file>
+  </gresource>
+</gresources>

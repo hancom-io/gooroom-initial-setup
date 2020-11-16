@@ -1,0 +1,108 @@
+/*************************
+ * 1. Minimalistic theme *
+ *************************/
+
+* {
+  -GtkDialog-button-spacing: 8;
+  outline-color: transparent;
+  text-shadow: none;
+  -gtk-icon-effect: none;
+  -gtk-icon-shadow: none; }
+
+.error-label {
+  color: red;
+  font-size: 110%; }
+
+.title-label {
+  font-weight: bold;
+  font-size: 170%; }
+
+.subtitle-label {
+  font-size: 110%; }
+
+.bold-label {
+  font-size: 110%;
+  font-weight: bold; }
+
+.summary-complete-label {
+  font-size: 140%;
+  font-weight: bold; }
+
+.summary-property-label {
+  font-size: 110%; }
+
+.summary-value-label {
+  font-size: 120%;
+  font-weight: bold; }
+
+.splash-message-label {
+  font-size: 120%;
+  font-weight: bold; }
+
+spinner {
+  color: #000000;
+  background: none;
+  -gtk-icon-source: -gtk-icontheme("splash-spinner-symbolic"); }
+  spinner:checked {
+    opacity: 0.6;
+    animation: spin 1s linear infinite; }
+    spinner:checked:disabled {
+      opacity: 0.2; }
+
+.assistant {
+  border-radius: 16px;
+  border-color: #1c1c1c;
+  background-color: #1c1c1c;
+  box-shadow: 0 2px 8px 3px rgba(0, 0, 0, 0.85); }
+  .assistant .left-box {
+    padding: 40px; }
+  .assistant .right-box {
+    padding: 40px;
+    color: #000000;
+    border-radius: 0 16px 16px 0;
+    background-color: #ffffff; }
+
+.mode-button {
+  color: #000000;
+  border-radius: 5px;
+  padding: 19px 30px 19px 32px;
+  background-color: transparent;}
+  .mode-button:hover {
+    color: #ffffff;
+    border-color: #3b61bd;
+    background-color: #3b61bd; }
+  .mode-button:active, .mode-button:checked {
+    color: #ffffff;
+    border-color: #4a73d6;
+    background-color: #4a73d6; }
+  .mode-button:disabled {
+    color: #ffffff;
+    border-color: #9b9b9b;
+    background-color: #9b9b9b; }
+  .mode-button:disabled label, button:disabled {
+    opacity: 0.6;
+    color: #ffffff; }
+
+.assistant-button {
+  border: none;
+  color: #ffffff;
+  padding: 8px 48px;
+  border-radius: 5px;
+  border-color: #4a73d6;
+  background-color: #4a73d6; }
+  .assistant-button:active {
+    border-color: #3b61bd;
+    background-color: #3b61bd; }
+  .assistant-button:disabled {
+    border-color: #9b9b9b;
+    background-color: #9b9b9b; }
+  .assistant-button:disabled label, button:disabled {
+    opacity: 0.6;
+    color: #ffffff; }
+
+.splash-window-box {
+  border: none;
+  padding: 24px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 1.0);
+  box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.35); }

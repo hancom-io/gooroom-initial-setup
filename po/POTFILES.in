@@ -1,0 +1,24 @@
+src/gis-main.c
+src/gis-assistant.c
+src/pages/language/gis-language-page.c
+src/pages/language/cc-language-chooser.c
+src/pages/account/um-utils.c
+src/pages/account/pw-utils.c
+src/pages/account/gis-account-page.c
+src/pages/goa/gis-goa-page.c
+src/pages/summary/gis-summary-page.c
+src/pages/summary/gis-adduser-helper.c
+src/pages/summary/run-passwd.c
+src/pages/summary/run-su.c
+src/pages/summary/splash-window.c
+src/pages/eulas/gis-eulas-page.c
+src/pages/network/gis-network-page.c
+[type: gettext/glade]src/gis-assistant.ui
+[type: gettext/glade]src/pages/language/gis-language-page.ui
+[type: gettext/glade]src/pages/language/cc-language-chooser.ui
+[type: gettext/glade]src/pages/eulas/gis-eulas-page.ui
+[type: gettext/glade]src/pages/account/gis-account-page.ui
+[type: gettext/glade]src/pages/goa/gis-goa-page.ui
+[type: gettext/glade]src/pages/network/gis-network-page.ui
+[type: gettext/glade]src/pages/summary/splash-window.ui
+[type: gettext/glade]src/pages/summary/gis-summary-page.ui

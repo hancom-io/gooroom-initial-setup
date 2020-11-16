@@ -1,0 +1,29 @@
+Gooroom platform user information consent
+
+Users may use the Gooroom platform by “agreeing” to the terms below, otherwise use is restricted.
+The information set at the first boot is used to run each application and is not used for any other purpose. The Gooroom platform is protected by "encrypting user data" and user information is also protected. The saved user information is as follows.
+
+Login account information
+Network connection information
+Cloud access information
+
+※ User consent information is saved as a file in the user account path, and can be checked in “~/.config/user_agreements” of the user account.
+
+Debian - Copyrights and Software Licenses
+
+We're sure that you've read some of the licenses that come with most commercial software — they usually say that you can only use one copy of the software on a single computer. This system's license isn't like that at all. We encourage you to put a copy of Debian GNU/Linux on every computer in your school or place of business. Lend your installation media to your friends and help them install it on their computers! You can even make thousands of copies and sell them — albeit with a few restrictions. Your freedom to install and use the system comes directly from Debian being based on free software.
+
+Calling software free doesn't mean that the software isn't copyrighted, and it doesn't mean that CDs/DVDs containing that software must be distributed at no charge. Free software, in part, means that the licenses of individual programs do not require you to pay for the privilege of distributing or using those programs. Free software also means that not only may anyone extend, adapt, and modify the software, but that they may distribute the results of their work as well.
+
+Many of the programs in the system are licensed under the GNU General Public License, often simply referred to as “the GPL”. The GPL requires you to make the source code of the programs available whenever you distribute a binary copy of the program; that provision of the license ensures that any user will be able to modify the software. Because of this provision, the source code for all such programs is available in the Debian system.
+
+There are several other forms of copyright statements and software licenses used on the programs in Debian. You can find the copyrights and licenses for every package installed on your system by looking in the file /usr/share/doc/package-name/copyright once you've installed a package on your system.
+
+For more information about licenses and how Debian determines whether software is free enough to be included in the main distribution, see the Debian Free Software Guidelines.
+※ Debian Free Software Guidelines : https://www.debian.org/social_contract#guidelines
+
+The most important legal notice is that this software comes with no warranties. The programmers who have created this software have done so for the benefit of the community. No guarantee is made as to the suitability of the software for any given purpose. However, since the software is free, you are empowered to modify that software to suit your needs — and to enjoy the benefits of the changes made by others who have extended the software in this way.
+
+※ Debian - Copyrights and Software Licenses : https://www.debian.org/releases/stable/amd64/ch01s08.en.html
+※ GNU General Public License : https://www.debian.org/releases/stable/amd64/apf.en.html
+

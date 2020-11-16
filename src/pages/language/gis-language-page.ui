@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.22.1 -->
+<interface>
+  <requires lib="gtk+" version="3.20"/>
+  <template class="GisLanguagePage" parent="GisPage">
+    <child>
+      <object class="GtkBox" id="box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">30</property>
+        <child>
+          <object class="GtkLabel" id="subtitle_label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="label" translatable="yes">Set the user's language for Gooroom login. After logging in, you can change the user's language in the settings.</property>
+            <property name="wrap">True</property>
+            <property name="wrap_mode">word</property>
+            <property name="ellipsize">end</property>
+            <property name="width_chars">0</property>
+            <property name="max_width_chars">0</property>
+            <property name="lines">3</property>
+            <property name="xalign">0</property>
+            <style>
+              <class name="dim-label"/>
+              <class name="subtitle-label"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="CcLanguageChooser" id="language_chooser">
+            <property name="visible">True</property>
+            <property name="valign">fill</property>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
