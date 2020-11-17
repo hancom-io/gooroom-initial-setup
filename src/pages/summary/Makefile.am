@@ -7,7 +7,6 @@ AM_CPPFLAGS = \
 	-I$(top_srcdir)/src \
 	-I$(top_builddir) \
 	-DLOCALEDIR=\"$(localedir)\" \
-	-DGIS_ADDUSER_HELPER=\"$(libexecdir)/gis-adduser-helper\" \
 	-DGIS_COPY_WORKER=\"$(libexecdir)/gis-copy-worker\" \
 	-DGIS_DELETE_LIGHTDM_CONFIG_HELPER=\"$(libexecdir)/gis-delete-lightdm-config-helper\"
 
@@ -28,7 +27,9 @@ libgissummary_la_SOURCES = \
 	splash-window.h \
 	splash-window.c \
 	run-su.h \
-	run-su.c
+	run-su.c \
+	run-passwd.h \
+	run-passwd.c
 
 libgissummary_la_CFLAGS = \
 	$(GTK_CFLAGS) \
@@ -45,21 +46,7 @@ libgissummary_la_LIBADD = \
 libgissummary_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
 
 libexec_PROGRAMS = \
-	gis-adduser-helper \
 	gis-copy-worker
-
-gis_adduser_helper_SOURCES = \
-	gis-adduser-helper.c \
-	run-passwd.h \
-	run-passwd.c
-
-gis_adduser_helper_CFLAGS = \
-	$(GLIB_CFLAGS) \
-	$(GIO_CFLAGS)
-
-gis_adduser_helper_LDFLAGS = \
-	$(GLIB_LIBS) \
-	$(GIO_LIBS)
 
 gis_copy_worker_SOURCES = \
 	gis-copy-worker.c

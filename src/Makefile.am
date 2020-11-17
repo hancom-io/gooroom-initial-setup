@@ -17,7 +17,9 @@ gooroom_initial_setup_SOURCES = \
 	gis-page.h \
 	gis-page.c \
 	gis-page-manager.h \
-	gis-page-manager.c
+	gis-page-manager.c \
+	gis-message-dialog.h \
+	gis-message-dialog.c
 
 AM_CPPFLAGS = \
 	-I$(top_srcdir) \

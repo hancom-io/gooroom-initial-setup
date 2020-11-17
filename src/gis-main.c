@@ -29,6 +29,20 @@
 #include "gis-keyring.h"
 #include "gis-assistant.h"
 
+static void
+ensure_nm_applet (void)
+{
+	gchar **argv;
+	const gchar *cmd;
+
+	cmd = "nm-applet --no-indicator";
+	g_shell_parse_argv (cmd, NULL, &argv, NULL);
+
+	g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+
+	g_strfreev (argv);
+}
+
 
 static void
 sigterm_cb (gpointer user_data)
@@ -110,6 +124,7 @@ main (int argc, char **argv)
 	gtk_init (&argc, &argv);
 
 	init_config_files ();
+	ensure_nm_applet ();
 	gis_ensure_login_keyring ();
 
 	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);

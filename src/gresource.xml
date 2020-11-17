@@ -2,6 +2,7 @@
 <gresources>
 	<gresource prefix="/kr/gooroom/initial-setup">
 		<file preprocess="xml-stripblanks">gis-assistant.ui</file>
+		<file preprocess="xml-stripblanks">gis-message-dialog.ui</file>
 	</gresource>
 
     <gresource prefix="/kr/gooroom/initial-setup">

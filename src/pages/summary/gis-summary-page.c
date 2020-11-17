@@ -33,12 +33,20 @@
 #include "summary-resources.h"
 #include "gis-summary-page.h"
 #include "gis-keyring.h"
+#include "run-passwd.h"
 #include "run-su.h"
 #include "splash-window.h"
+#include "gis-message-dialog.h"
 
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
+
+enum {
+	ACCOUNT_CREATING_ERROR,
+	PASSWORD_SETTING_ERROR,
+	ENV_CONFIGURATION_ERROR
+};
 
 struct _GisSummaryPagePrivate {
 	GtkWidget *setup_done_label;
@@ -71,6 +79,110 @@ hide_splash_window (GisSummaryPage *page)
 		splash_window_destroy (priv->splash);
 		priv->splash = NULL;
 	}
+}
+
+static gboolean
+is_valid_username (const char *user)
+{
+	struct passwd pw, *pwp;
+	char buf[4096] = {0,};
+
+	getpwnam_r (user, &pw, buf, sizeof (buf), &pwp);
+
+	return (pwp != NULL);
+}
+
+static void
+delete_lightdm_config (void)
+{
+	gchar *cmd = NULL;
+
+	cmd = g_strdup_printf ("/usr/bin/pkexec %s", GIS_DELETE_LIGHTDM_CONFIG_HELPER);
+
+	if (!g_spawn_command_line_sync (cmd, NULL, NULL, NULL, NULL)) {
+		g_warning ("Couldn't delete /etc/lightdm/lightdm.conf.d/90_gooroom-initial-setup.conf");
+	}
+
+	g_free (cmd);
+}
+
+static void
+delete_account (const char *user)
+{
+	gchar *cmd = NULL;
+
+	if (is_valid_username (user)) {
+		cmd = g_strdup_printf ("/usr/bin/pkexec /usr/sbin/userdel -rf %s", user);
+		if (!g_spawn_command_line_sync (cmd, NULL, NULL, NULL, NULL)) {
+			g_warning ("Couldn't delete account: %s", user);
+		}
+	}
+	g_free (cmd);
+}
+
+static gboolean
+system_restart_cb (gpointer user_data)
+{
+	const gchar *cmd;
+	gchar **argv = NULL;
+	GisSummaryPage *self = GIS_SUMMARY_PAGE (user_data);
+
+	hide_splash_window (self);
+
+	cmd = "/usr/bin/gooroom-logout-command --reboot --delay=100";
+
+	g_shell_parse_argv (cmd, NULL, &argv, NULL);
+
+	g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+
+	g_strfreev (argv);
+
+	gtk_main_quit ();
+
+	return FALSE;
+}
+
+static void
+show_error_dialog (GisSummaryPage *page,
+                   int             error_code,
+                   const gchar    *title,
+                   const gchar    *message)
+{
+	int res;
+	gchar *username = NULL;
+    GtkWidget *dialog, *toplevel;
+	GisSummaryPagePrivate *priv = page->priv;
+	GisPageManager *manager = GIS_PAGE (page)->manager;
+
+	gis_page_manager_get_user_info (manager, NULL, &username, NULL);
+
+	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (page));
+
+	dialog = gis_message_dialog_new (GTK_WINDOW (toplevel),
+                                     "dialog-warning-symbolic.symbolic",
+                                     title,
+                                     message);
+
+	if (error_code == ACCOUNT_CREATING_ERROR ||
+        error_code == PASSWORD_SETTING_ERROR ||
+        error_code == ENV_CONFIGURATION_ERROR)
+	{
+		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+                                _("_Ok"), GTK_RESPONSE_OK,
+                                _("_Cancel"), GTK_RESPONSE_CANCEL,
+                                NULL);
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+		res = gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+
+		if (res == GTK_RESPONSE_OK) {
+			delete_account (username);
+			g_idle_add ((GSourceFunc)system_restart_cb, page);
+		}
+	}
+
+	g_free (username);
 }
 
 static void
@@ -166,6 +278,9 @@ update_user_info (GisSummaryPage *page)
 
 	if (username)
 		gtk_label_set_text (GTK_LABEL (priv->username_label), username);
+
+	g_free (realname);
+	g_free (username);
 }
 
 static void
@@ -247,40 +362,6 @@ update_hostname_info (GisSummaryPage *page)
 }
 
 static void
-gis_delete_lightdm_config (void)
-{
-	gchar *cmd = NULL;
-
-	cmd = g_strdup_printf ("/usr/bin/pkexec %s", GIS_DELETE_LIGHTDM_CONFIG_HELPER);
-
-	if (!g_spawn_command_line_sync (cmd, NULL, NULL, NULL, NULL)) {
-		g_warning ("Couldn't delete /etc/lightdm/lightdm.conf.d/90_gooroom-initial-setup.conf");
-	}
-
-	g_free (cmd);
-}
-
-static gboolean
-system_restart_cb (gpointer user_data)
-{
-	const gchar *cmd;
-	gchar **argv = NULL;
-	GisSummaryPage *self = GIS_SUMMARY_PAGE (user_data);
-
-	hide_splash_window (self);
-
-	cmd = "/usr/bin/gooroom-logout-command --reboot --delay=100";
-
-	g_shell_parse_argv (cmd, NULL, &argv, NULL);
-
-	g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
-
-	g_strfreev (argv);
-
-	return FALSE;
-}
-
-static void
 copy_worker_done_cb (GPid pid, gint status, gpointer user_data)
 {
 	const gchar *message;
@@ -289,12 +370,12 @@ copy_worker_done_cb (GPid pid, gint status, gpointer user_data)
 	g_spawn_close_pid (pid);
 
 	/* delete /etc/lightdm/lightdm.conf.d/90_gooroom-initial-setup.conf */
-	gis_delete_lightdm_config ();
+	delete_lightdm_config ();
 
 	message = _("User's environment configuration is completed.\nRestart the system after a while...");
 	splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), message);
 
-	g_timeout_add (5000, (GSourceFunc)system_restart_cb, self);
+	g_timeout_add (3000, (GSourceFunc)system_restart_cb, self);
 }
 
 static gboolean
@@ -331,11 +412,20 @@ su_auth_cb (SuHandler *handler,
 {
 	GisSummaryPage *page = GIS_SUMMARY_PAGE (user_data);
 
-	if (error) {
-		g_warning ("failed to run su: %s", error->message);
-		g_error_free (error);
-	} else {
+	if (!error) {
 		g_idle_add ((GSourceFunc)do_copy_work, page);
+	} else {
+		g_warning ("failed to switch user: %s", error->message);
+		g_error_free (error);
+
+		hide_splash_window (page);
+
+		const gchar *message, *title;
+
+		title = _("User Environment Configuration Error");
+		message = _("Failed to configure user's environment. Do you want to try again after rebooting the system?");
+
+		show_error_dialog (page, ENV_CONFIGURATION_ERROR, title, message);
 	}
 }
 
@@ -360,9 +450,69 @@ run_su_cb (gpointer user_data)
 }
 
 static void
-adduser_done_cb (GPid pid, gint status, gpointer user_data)
+password_changed_done_cb (PasswdHandler *handler,
+                          GError        *error,
+                          gpointer       user_data)
 {
 	GisSummaryPage *page = GIS_SUMMARY_PAGE (user_data);
+	GisPageManager *manager = GIS_PAGE (page)->manager;
+
+	if (!error) {
+		gchar *password = NULL;
+		gis_page_manager_get_user_info (manager, NULL, NULL, &password);
+		if (password)
+			gis_update_login_keyring_password (password);
+
+		g_timeout_add (1000, (GSourceFunc)run_su_cb, page);
+
+		g_free (password);
+	} else {
+		g_warning ("failed to run su: %s", error->message);
+		g_error_free (error);
+
+		hide_splash_window (page);
+
+		const gchar *message, *title;
+
+		title = _("Password Setting Error");
+		message = _("Failed to set password. Do you want to try again after rebooting the system?");
+
+		show_error_dialog (page, PASSWORD_SETTING_ERROR, title, message);
+	}
+}
+
+static void
+adduser_done_cb (GPid pid, gint status, gpointer user_data)
+{
+	PasswdHandler  *passwd_handler = NULL;
+	gchar *username = NULL, *password = NULL;
+	GisSummaryPage *page = GIS_SUMMARY_PAGE (user_data);
+	GisSummaryPagePrivate *priv = page->priv;
+	GisPageManager *manager = GIS_PAGE (page)->manager;
+
+	g_spawn_close_pid (pid);
+
+	gis_page_manager_get_user_info (manager, NULL, &username, &password);
+
+	if (is_valid_username (username)) {
+		g_usleep (G_USEC_PER_SEC); // waiting for 1 secs
+
+		passwd_handler = passwd_init ();
+		passwd_change_password (passwd_handler, username, password,
+				(PasswdCallback) password_changed_done_cb, page);
+	} else {
+		const gchar *message, *title;
+
+		title = _("Account Creating Error");
+		message = _("Failed to create an account. Do you want to try again after rebooting the system?");
+
+		hide_splash_window (page);
+
+		show_error_dialog (page, ACCOUNT_CREATING_ERROR, title, message);
+	}
+
+	g_free (username);
+	g_free (password);
 
 #if 0
 	gint exit_status = WEXITSTATUS (status);
@@ -382,10 +532,6 @@ adduser_done_cb (GPid pid, gint status, gpointer user_data)
 		break;
 	}
 #endif
-
-	g_spawn_close_pid (pid);
-
-	g_timeout_add (1000, (GSourceFunc)run_su_cb, page);
 }
 
 static void
@@ -393,22 +539,28 @@ gis_summary_page_save_data (GisPage *page)
 {
 	GPid pid;
 	gchar **argv;
-	gchar *cmd = NULL, *realname = NULL, *username = NULL, *password = NULL;
+	const char *cmd_prefix;
+	gchar *cmd = NULL, *realname = NULL, *username = NULL;
 	GisSummaryPage *self = GIS_SUMMARY_PAGE (page);
 	GisSummaryPagePrivate *priv = self->priv;
 	GisPageManager *manager = page->manager;
 
 	show_splash_window (self);
 
-	gis_page_manager_get_user_info (manager, &realname, &username, &password);
+	gis_page_manager_get_user_info (manager, &realname, &username, NULL);
 
-	gis_update_login_keyring_password (password);
+	cmd_prefix = "/usr/bin/pkexec /usr/sbin/adduser --force-badname --shell /bin/bash --disabled-login --encrypt-home --gecos";
 
 	if (!realname)
 		realname = g_strdup (username);
 
-	cmd = g_strdup_printf ("/usr/bin/pkexec %s -e -r '%s' -u '%s' -p '%s'",
-                           GIS_ADDUSER_HELPER, realname, username, password);
+	if (realname) {
+		char *utf8_realname = g_locale_to_utf8 (realname, -1, NULL, NULL, NULL);
+		cmd = g_strdup_printf ("%s \"%s\" %s", cmd_prefix, utf8_realname, username);
+		g_free (utf8_realname);
+	} else {
+		cmd = g_strdup_printf ("%s \"%s\" %s", cmd_prefix, username, username);
+	}
 
 	g_shell_parse_argv (cmd, NULL, &argv, NULL);
 
@@ -419,7 +571,6 @@ gis_summary_page_save_data (GisPage *page)
 	g_free (cmd);
 	g_free (realname);
 	g_free (username);
-	g_free (password);
 	g_strfreev (argv);
 }
 

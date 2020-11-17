@@ -242,6 +242,9 @@ done_button_clicked_cb (GtkWidget *button,
 	gtk_widget_set_sensitive (priv->done, FALSE);
 
 	gis_assistant_save_data (assistant);
+
+	gtk_widget_set_sensitive (priv->backward, TRUE);
+	gtk_widget_set_sensitive (priv->done, TRUE);
 }
 
 static void

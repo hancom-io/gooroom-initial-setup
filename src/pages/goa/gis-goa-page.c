@@ -216,7 +216,6 @@ populate_provider_list (GisGoaPage *page)
 	add_provider_to_list (page, "google");
 	add_provider_to_list (page, "owncloud");
 	add_provider_to_list (page, "windows_live");
-	add_provider_to_list (page, "facebook");
 }
 
 static void

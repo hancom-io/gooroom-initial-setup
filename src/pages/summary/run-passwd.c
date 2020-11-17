@@ -147,19 +147,17 @@ ignore_sigpipe (gpointer data)
 /* Spawn passwd backend
  * Returns: TRUE on success, FALSE otherwise and sets error appropriately */
 static gboolean
-spawn_passwd (PasswdHandler *passwd_handler, gboolean is_passwd, GError **error)
+spawn_passwd (PasswdHandler *passwd_handler, GError **error)
 {
-        gchar   *argv[2];
+        gchar   *argv[4] = {0,};
         gchar  **envp;
         gint    my_stdin, my_stdout, my_stderr;
 
 
-if (is_passwd)
-        argv[0] = "/usr/bin/passwd";    /* Is it safe to rely on a hard-coded path? */
-else
-        argv[0] = "/bin/su";
-        argv[1] = g_strdup (passwd_handler->user);
-        argv[2] = NULL;
+        argv[0] = "/usr/bin/pkexec";    /* Is it safe to rely on a hard-coded path? */
+        argv[1] = "/usr/bin/passwd";    /* Is it safe to rely on a hard-coded path? */
+        argv[2] = g_strdup (passwd_handler->user);
+        argv[3] = NULL;
 
         envp = g_get_environ ();
         envp = g_environ_setenv (envp, "LC_ALL", "C", TRUE);
@@ -184,7 +182,7 @@ else
                 return FALSE;
         }
 
-        g_free (argv[1]);
+        g_free (argv[2]);
         g_strfreev (envp);
 
         /* 2>&1 */
@@ -673,7 +671,6 @@ gboolean
 passwd_change_password (PasswdHandler *passwd_handler,
                         const char    *user,
                         const char    *new_password,
-                        gboolean       is_passwd,
                         PasswdCallback cb,
                         const gpointer user_data)
 {
@@ -700,7 +697,7 @@ passwd_change_password (PasswdHandler *passwd_handler,
                 /* Spawn backend */
                 stop_passwd (passwd_handler);
 
-                if (!spawn_passwd (passwd_handler, is_passwd, &error)) {
+                if (!spawn_passwd (passwd_handler, &error)) {
                         g_warning ("%s", error->message);
                         g_error_free (error);
 

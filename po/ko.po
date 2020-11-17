@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gooroom-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-16 16:55+0900\n"
+"POT-Creation-Date: 2020-11-17 16:59+0900\n"
 "PO-Revision-Date: 2019-09-04 17:37-0400\n"
 "Last-Translator: Gooroom <gooroom@gooroom.kr>\n"
 "Language-Team: Gooroom <gooroom@gooroom.kr>\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/gis-assistant.c:431 ../src/gis-assistant.ui.h:1
+#: ../src/gis-assistant.c:434 ../src/gis-assistant.ui.h:1
 msgid "Prev"
 msgstr "이전"
 
-#: ../src/gis-assistant.c:432 ../src/gis-assistant.ui.h:2
+#: ../src/gis-assistant.c:435 ../src/gis-assistant.ui.h:2
 msgid "Next"
 msgstr "다음"
 
-#: ../src/gis-assistant.c:433 ../src/gis-assistant.ui.h:3
+#: ../src/gis-assistant.c:436 ../src/gis-assistant.ui.h:3
 msgid "Skip"
 msgstr "건너뛰기"
 
-#: ../src/gis-assistant.c:434 ../src/gis-assistant.ui.h:4
+#: ../src/gis-assistant.c:437 ../src/gis-assistant.ui.h:4
 msgid "Done"
 msgstr "완료"
 
@@ -200,14 +200,14 @@ msgstr ""
 "보를 변경할 수 있습니다."
 
 #: ../src/pages/account/gis-account-page.c:327
-#: ../src/pages/summary/gis-summary-page.c:468
+#: ../src/pages/summary/gis-summary-page.c:619
 #: ../src/pages/account/gis-account-page.ui.h:2
 #: ../src/pages/summary/gis-summary-page.ui.h:3
 msgid "User Name"
 msgstr "아이디"
 
 #: ../src/pages/account/gis-account-page.c:328
-#: ../src/pages/summary/gis-summary-page.c:469
+#: ../src/pages/summary/gis-summary-page.c:620
 #: ../src/pages/account/gis-account-page.ui.h:3
 #: ../src/pages/summary/gis-summary-page.ui.h:4
 msgid "Real Name"
@@ -227,15 +227,15 @@ msgstr "암호 확인"
 msgid "Add Account"
 msgstr "계정 추가"
 
-#: ../src/pages/goa/gis-goa-page.c:276 ../src/pages/goa/gis-goa-page.ui.h:2
+#: ../src/pages/goa/gis-goa-page.c:275 ../src/pages/goa/gis-goa-page.ui.h:2
 msgid "The system's network is inactive"
 msgstr "시스템의 네트워크가 비활성 상태입니다."
 
-#: ../src/pages/goa/gis-goa-page.c:385 ../src/pages/goa/gis-goa-page.c:469
+#: ../src/pages/goa/gis-goa-page.c:384 ../src/pages/goa/gis-goa-page.c:468
 msgid "Online Accounts Settings"
 msgstr "온라인 계정 설정"
 
-#: ../src/pages/goa/gis-goa-page.c:388 ../src/pages/goa/gis-goa-page.ui.h:1
+#: ../src/pages/goa/gis-goa-page.c:387 ../src/pages/goa/gis-goa-page.ui.h:1
 msgid ""
 "Connect your accounts to easily access your email, online calendar, "
 "contacts, documents and photos. Accounts can be added and removed at any "
@@ -244,7 +244,15 @@ msgstr ""
 "전자메일 계정, 온라인 달력, 연락처, 문서, 사진에 쉽게 접근할 계정에 연결합니"
 "다.온라인 계정은 로그인 후 설정에서 추가 및 삭제할 수 있습니다."
 
-#: ../src/pages/summary/gis-summary-page.c:84
+#: ../src/pages/summary/gis-summary-page.c:171
+msgid "_Ok"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:172
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:196
 msgid ""
 "Configuring user's environment\n"
 "Please wait..."
@@ -252,15 +260,15 @@ msgstr ""
 "사용자 환경을 구성하고 있습니다.\n"
 "잠시만 기다려 주십시오..."
 
-#: ../src/pages/summary/gis-summary-page.c:152
+#: ../src/pages/summary/gis-summary-page.c:264
 msgid "No Use"
 msgstr "사용안함"
 
-#: ../src/pages/summary/gis-summary-page.c:197
+#: ../src/pages/summary/gis-summary-page.c:312
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: ../src/pages/summary/gis-summary-page.c:294
+#: ../src/pages/summary/gis-summary-page.c:375
 msgid ""
 "User's environment configuration is completed.\n"
 "Restart the system after a while..."
@@ -268,81 +276,114 @@ msgstr ""
 "사용자 환경 구성을 완료하였습니다.\n"
 "잠시후 시스템을 재시작합니다..."
 
-#: ../src/pages/summary/gis-summary-page.c:462
-#: ../src/pages/summary/gis-summary-page.c:484
+#: ../src/pages/summary/gis-summary-page.c:425
+msgid "User Environment Configuration Error"
+msgstr "사용자 환경 구성 오류"
+
+#: ../src/pages/summary/gis-summary-page.c:426
+msgid ""
+"Failed to configure user's environment. Do you want to try again after "
+"rebooting the system?"
+msgstr ""
+"사용자 환경 구성중 오류가 발생하였습니다. 시스템 재시작 후 다시 시도하시겠습"
+"니까?"
+
+#: ../src/pages/summary/gis-summary-page.c:477
+msgid "Password Setting Error"
+msgstr "암호 설정 오류"
+
+#: ../src/pages/summary/gis-summary-page.c:478
+msgid ""
+"Failed to set password. Do you want to try again after rebooting the system?"
+msgstr ""
+"암호 설정중 오류가 발생하였습니다. 시스템 재시작 후 다시 시도하시겠습니까?"
+
+#: ../src/pages/summary/gis-summary-page.c:506
+msgid "Account Creating Error"
+msgstr "계정 생성 오류"
+
+#: ../src/pages/summary/gis-summary-page.c:507
+msgid ""
+"Failed to create an account. Do you want to try again after rebooting the "
+"system?"
+msgstr ""
+"계정 생성중 오류가 발생하였습니다. 시스템 재시작 후 다시 시도하시겠습니까?"
+
+#: ../src/pages/summary/gis-summary-page.c:613
+#: ../src/pages/summary/gis-summary-page.c:635
 msgid "Setup Complete"
 msgstr "설정 완료"
 
-#: ../src/pages/summary/gis-summary-page.c:464
+#: ../src/pages/summary/gis-summary-page.c:615
 #: ../src/pages/summary/gis-summary-page.ui.h:1
 msgid "Setup is complete"
 msgstr "구름OS 로그인 준비를 마쳤습니다."
 
-#: ../src/pages/summary/gis-summary-page.c:465
+#: ../src/pages/summary/gis-summary-page.c:616
 #: ../src/pages/summary/gis-summary-page.ui.h:2
 msgid "OS"
 msgstr "운영체제"
 
-#: ../src/pages/summary/gis-summary-page.c:466
+#: ../src/pages/summary/gis-summary-page.c:617
 #: ../src/pages/summary/gis-summary-page.ui.h:6
 msgid "Hostname"
 msgstr "호스트이름"
 
-#: ../src/pages/summary/gis-summary-page.c:467
+#: ../src/pages/summary/gis-summary-page.c:618
 #: ../src/pages/summary/gis-summary-page.ui.h:5
 msgid "Language"
 msgstr "언어"
 
-#: ../src/pages/summary/gis-summary-page.c:470
+#: ../src/pages/summary/gis-summary-page.c:621
 #: ../src/pages/summary/gis-summary-page.ui.h:7
 msgid "Online Accounts"
 msgstr "온라인 계정"
 
-#: ../src/pages/summary/run-passwd.c:431 ../src/pages/summary/run-su.c:384
+#: ../src/pages/summary/run-passwd.c:429 ../src/pages/summary/run-su.c:384
 msgid "Authentication failed"
 msgstr "인증 실패"
 
-#: ../src/pages/summary/run-passwd.c:511
+#: ../src/pages/summary/run-passwd.c:509
 #, c-format
 msgid "The new password is too short"
 msgstr "새 암호가 너무 짧습니다."
 
-#: ../src/pages/summary/run-passwd.c:517
+#: ../src/pages/summary/run-passwd.c:515
 #, c-format
 msgid "The new password is too simple"
 msgstr "새 암호가 너무 간단합니다."
 
-#: ../src/pages/summary/run-passwd.c:523
+#: ../src/pages/summary/run-passwd.c:521
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "이전 암호와 새 암호가 너무 비슷합니다."
 
-#: ../src/pages/summary/run-passwd.c:526
+#: ../src/pages/summary/run-passwd.c:524
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "새 암호가 이미 최근에 사용했던 암호입니다."
 
-#: ../src/pages/summary/run-passwd.c:529
+#: ../src/pages/summary/run-passwd.c:527
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "새 암호는 반드시 숫자 혹은 특수문자를 포함해야 합니다."
 
-#: ../src/pages/summary/run-passwd.c:533
+#: ../src/pages/summary/run-passwd.c:531
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "이전 암호와 새 암호가 같습니다."
 
-#: ../src/pages/summary/run-passwd.c:537
+#: ../src/pages/summary/run-passwd.c:535
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "최초 인증이후 암호가 변경되었습니다!"
 
-#: ../src/pages/summary/run-passwd.c:541
+#: ../src/pages/summary/run-passwd.c:539
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "새 암호에 문자 종류가 너무 적습니다"
 
-#: ../src/pages/summary/run-passwd.c:545
+#: ../src/pages/summary/run-passwd.c:543
 #, c-format
 msgid "Unknown error"
 msgstr "알 수 없는 에러"
@@ -442,6 +483,3 @@ msgstr "네트워크 사용하기"
 #: ../src/pages/summary/splash-window.ui.h:1
 msgid "Please wait..."
 msgstr "잠시만 기다려 주십시오..."
-
-#~ msgid "Exit"
-#~ msgstr "나가기"

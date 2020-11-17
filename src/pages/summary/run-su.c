@@ -134,7 +134,7 @@ ignore_sigpipe (gpointer data)
 static gboolean
 spawn_su (SuHandler *su_handler, GError **error)
 {
-	gchar   *argv[2];
+	gchar   *argv[3] = {0,};
 	gchar  **envp;
 	gint    my_stdin, my_stdout, my_stderr;
 

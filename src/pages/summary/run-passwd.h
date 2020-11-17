@@ -50,7 +50,7 @@ void           passwd_destroy             (PasswdHandler *passwd_handler);
 
 gboolean       passwd_change_password     (PasswdHandler *passwd_handler,
                                            const char    *user,
-                                           const char    *new_password, gboolean is_passwd,
+                                           const char    *new_password,
                                            PasswdCallback cb,
                                            const gpointer user_data);
 

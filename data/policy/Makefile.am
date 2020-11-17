@@ -1,5 +1,5 @@
 kr.gooroom.InitialSetup.policy.in: kr.gooroom.InitialSetup.policy.in.in Makefile
-	$(AM_V_GEN) sed -e "s|\@libexecdir\@|$(libexecdir)|" $< >$@
+	$(AM_V_GEN) sed -e "s|\@bindir\@|$(bindir)|" -e "s|\@sbindir\@|$(sbindir)|" -e "s|\@libexecdir\@|$(libexecdir)|" $< >$@
 
 @INTLTOOL_POLICY_RULE@
 polkitdir       = $(datadir)/polkit-1/actions
