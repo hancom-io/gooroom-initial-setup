@@ -1,6 +1,6 @@
 [Allow the gooroom-initial-setup user to control the network and add users without prompting]
 Identity=unix-user:gis
-Action=org.freedesktop.NetworkManager.*;kr.gooroom.InitialSetup.adduser;kr.gooroom.InitialSetup.userdel;kr.gooroom.InitialSetup.passwd
+Action=org.freedesktop.NetworkManager.*;kr.gooroom.InitialSetup.adduser;kr.gooroom.InitialSetup.userdel;kr.gooroom.InitialSetup.passwd;kr.gooroom.InitialSetup.usermod
 ResultAny=no
 ResultInactive=no
 ResultActive=yes

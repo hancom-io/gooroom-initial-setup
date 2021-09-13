@@ -3,6 +3,7 @@ Section: x11
 Priority: optional
 Maintainer: Gooroom Maintainers <gooroom@gooroom.kr>
 Build-Depends: debhelper (>= 9),
+               gnome-common,
                pkg-config,
                libgtk-3-dev,
                intltool,
@@ -23,7 +24,7 @@ Package: gooroom-initial-setup
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         gnome-keyring,
+#gnome-keyring,
          adduser,
          gnome-online-accounts (>= 3.25.3)
 Description: Initial Gooroom system setup helper

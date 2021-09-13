@@ -538,12 +538,18 @@ static void
 gis_summary_page_save_data (GisPage *page)
 {
 	GPid pid;
+	guint i = 0;
 	gchar **argv;
 	const char *cmd_prefix;
 	gchar *cmd = NULL, *realname = NULL, *username = NULL;
 	GisSummaryPage *self = GIS_SUMMARY_PAGE (page);
 	GisSummaryPagePrivate *priv = self->priv;
 	GisPageManager *manager = page->manager;
+	static char *modes[] = { "adm", "audio", "bluetooth", "cdrom", "dialout",
+							 "dip", "fax", "floppy", "fuse", "lpadmin",
+							 "netdev", "plugdev", "powerdev", "sambashare",
+							 "scanner", "sudo", "tape", "users", "vboxusers",
+							 "video", NULL };
 
 	show_splash_window (self);
 
@@ -566,6 +572,11 @@ gis_summary_page_save_data (GisPage *page)
 
 	if (g_spawn_async (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &pid, NULL)) {
 		g_child_watch_add (pid, (GChildWatchFunc) adduser_done_cb, self);
+	}
+
+	for (i = 0; modes[i] != NULL; i++) {
+		cmd = g_strdup_printf ("/usr/bin/pkexec /usr/sbin/usermod -aG %s %s",modes[i], username);
+		g_spawn_command_line_sync (cmd, NULL, NULL, NULL, NULL);
 	}
 
 	g_free (cmd);

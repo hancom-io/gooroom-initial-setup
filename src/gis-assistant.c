@@ -61,11 +61,11 @@ typedef struct {
 
 
 static PageData page_table[] = {
-	{ "language", gis_prepare_language_page },
+	//{ "language", gis_prepare_language_page },
 	{ "eula",     gis_prepare_eulas_page    },
 	{ "network",  gis_prepare_network_page  },
 	{ "account",  gis_prepare_account_page  },
-	{ "goa",      gis_prepare_goa_page      },
+	//{ "goa",      gis_prepare_goa_page      },
 	{ "summary",  gis_prepare_summary_page  },
 	{ NULL, NULL }
 };

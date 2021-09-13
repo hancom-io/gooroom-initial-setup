@@ -56,7 +56,6 @@ change_owner (const char *user_homedir)
 	guint i = 0;
 	static char *dirs[] = { ".xsessionrc", ".config", ".local", NULL };
 
-
 	for (i = 0; dirs[i] != NULL; i++) {
 		char *cmd = g_strdup_printf ("/bin/chown -R %s:%s %s/%s", user, user, user_homedir, dirs[i]);
 		if (!g_spawn_command_line_sync (cmd, NULL, NULL, NULL, NULL)) {

@@ -44,4 +44,12 @@
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">@libexecdir@/gis-delete-lightdm-config-helper</annotate>
   </action>
+  <action id="kr.gooroom.InitialSetup.usermod">
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">@sbindir@/usermod</annotate>
+  </action>
 </policyconfig>

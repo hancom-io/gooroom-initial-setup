@@ -4,4 +4,4 @@ if [ -z $XDG_CURRENT_DESKTOP ]; then
   export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME"
 fi
 
-exec gnome-session --autostart=/etc/xdg/autostart/gooroom-initial-setup --session=gooroom-initial-setup --disable-acceleration-check "$@"
+exec gnome-session --systemd --session=gooroom-initial-setup --disable-acceleration-check "$@"
