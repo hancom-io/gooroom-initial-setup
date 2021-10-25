@@ -142,6 +142,45 @@ system_restart_cb (gpointer user_data)
 	return FALSE;
 }
 
+static gboolean
+system_logout_cb (gpointer user_data)
+{
+	const gchar *cmd;
+	gchar **argv = NULL;
+	GisSummaryPage *self = GIS_SUMMARY_PAGE (user_data);
+	int res;
+	GtkWidget *dialog, *toplevel;
+	const char *message, *title;
+
+	hide_splash_window (self);
+
+    title = _("Done setting");
+	message = _("All settings have been completed. Do you want to logout?");
+	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+
+	dialog = gis_message_dialog_new (GTK_WINDOW (toplevel),
+                                     "dialog-warning-symbolic.symbolic",
+                                     title, message);
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+							_("_Ok"), GTK_RESPONSE_OK,
+							_("_Cancel"), GTK_RESPONSE_CANCEL,
+							NULL);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	if (res == GTK_RESPONSE_OK) {
+		cmd = "/usr/bin/gooroom-logout-command --logout --delay=100";
+		g_shell_parse_argv (cmd, NULL, &argv, NULL);
+		g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+	}
+	g_strfreev (argv);
+	gtk_main_quit ();
+
+	return FALSE;
+}
+
 static void
 show_error_dialog (GisSummaryPage *page,
                    int             error_code,
@@ -375,7 +414,7 @@ copy_worker_done_cb (GPid pid, gint status, gpointer user_data)
 	message = _("User's environment configuration is completed.\nRestart the system after a while...");
 	splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), message);
 
-	g_timeout_add (3000, (GSourceFunc)system_restart_cb, self);
+	g_timeout_add (3000, (GSourceFunc)system_logout_cb, self);
 }
 
 static gboolean

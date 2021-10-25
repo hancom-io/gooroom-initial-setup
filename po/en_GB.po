@@ -2,12 +2,11 @@
 # Copyright (C) 2015-2020 Gooroom <gooroom@gooroom.kr>
 # This file is distributed under the same license as the gooroom-initial-setup package.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: gooroom-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 14:22+0900\n"
+"POT-Creation-Date: 2021-10-25 14:37+0900\n"
 "PO-Revision-Date: 2019-09-04 17:37-0400\n"
 "Last-Translator: Gooroom <gooroom@gooroom.kr>\n"
 "Language-Team: Gooroom <gooroom@gooroom.kr>\n"
@@ -16,3 +15,452 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: ../src/gis-assistant.c:434 ../src/gis-assistant.ui.h:1
+msgid "Prev"
+msgstr ""
+
+#: ../src/gis-assistant.c:435 ../src/gis-assistant.ui.h:2
+msgid "Next"
+msgstr ""
+
+#: ../src/gis-assistant.c:436 ../src/gis-assistant.ui.h:3
+msgid "Skip"
+msgstr ""
+
+#: ../src/gis-assistant.c:437 ../src/gis-assistant.ui.h:4
+msgid "Done"
+msgstr ""
+
+#: ../src/pages/language/gis-language-page.c:123
+#: ../src/pages/language/gis-language-page.c:149
+msgid "Language Settings"
+msgstr ""
+
+#: ../src/pages/language/gis-language-page.c:126
+#: ../src/pages/language/gis-language-page.ui.h:1
+msgid ""
+"Set the user's language for Gooroom login. After logging in, you can change "
+"the user's language in the settings."
+msgstr ""
+
+#: ../src/pages/account/um-utils.c:140
+msgid "Sorry, that user name isn’t available. Please try another."
+msgstr ""
+
+#: ../src/pages/account/um-utils.c:145
+#, c-format
+msgid "The username is too long."
+msgstr ""
+
+#: ../src/pages/account/um-utils.c:150
+msgid "The username cannot start with a “-”."
+msgstr ""
+
+#: ../src/pages/account/um-utils.c:163
+msgid ""
+"The username should only consist of upper and lower case letters from a-z, "
+"digits and the following characters: . - _"
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:81
+msgctxt "Password hint"
+msgid "The new password needs to be different from the old one."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:83
+msgctxt "Password hint"
+msgid ""
+"This password is very similar to your last one. Try changing some letters "
+"and numbers."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:85 ../src/pages/account/pw-utils.c:93
+msgctxt "Password hint"
+msgid ""
+"This password is very similar to your last one. Try changing the password a "
+"bit more."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:87
+msgctxt "Password hint"
+msgid ""
+"This is a weak password. A password without your user name would be stronger."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:89
+msgctxt "Password hint"
+msgid "This is a weak password. Try to avoid using your name in the password."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:91
+msgctxt "Password hint"
+msgid ""
+"This is a weak password. Try to avoid some of the words included in the "
+"password."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:95
+msgctxt "Password hint"
+msgid "This is a weak password. Try to avoid common words."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:97
+msgctxt "Password hint"
+msgid "This is a weak password. Try to avoid reordering existing words."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:99
+msgctxt "Password hint"
+msgid "This is a weak password. Try to use more numbers."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:101
+msgctxt "Password hint"
+msgid "This is a weak password. Try to use more uppercase letters."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:103
+msgctxt "Password hint"
+msgid "This is a weak password. Try to use more lowercase letters."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:105
+msgctxt "Password hint"
+msgid ""
+"This is a weak password. Try to use more special characters, like "
+"punctuation."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:107
+msgctxt "Password hint"
+msgid ""
+"This is a weak password. Try to use a mixture of letters, numbers and "
+"punctuation."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:109
+msgctxt "Password hint"
+msgid "This is a weak password. Try to avoid repeating the same character."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:111
+msgctxt "Password hint"
+msgid ""
+"This is a weak password. Try to avoid repeating the same type of character: "
+"you need to mix up letters, numbers and punctuation."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:113
+msgctxt "Password hint"
+msgid "This is a weak password. Try to avoid sequences like 1234 or abcd."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:115
+msgctxt "Password hint"
+msgid ""
+"This is a weak password. Try to add more letters, numbers and punctuation."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:117
+msgctxt "Password hint"
+msgid "Mix uppercase and lowercase and try to use a number or two."
+msgstr ""
+
+#: ../src/pages/account/pw-utils.c:119
+msgctxt "Password hint"
+msgid ""
+"Adding more letters, numbers and punctuation will make the password stronger."
+msgstr ""
+
+#: ../src/pages/account/gis-account-page.c:161
+msgid "The passwords do not match."
+msgstr ""
+
+#: ../src/pages/account/gis-account-page.c:321
+#: ../src/pages/account/gis-account-page.c:366
+msgid "Creating Accounts"
+msgstr ""
+
+#: ../src/pages/account/gis-account-page.c:324
+#: ../src/pages/account/gis-account-page.ui.h:1
+msgid ""
+"Enter the user's information for Gooroom login. After logging in, you can "
+"change your information in Settings."
+msgstr ""
+
+#: ../src/pages/account/gis-account-page.c:327
+#: ../src/pages/summary/gis-summary-page.c:669
+#: ../src/pages/account/gis-account-page.ui.h:2
+#: ../src/pages/summary/gis-summary-page.ui.h:3
+msgid "User Name"
+msgstr ""
+
+#: ../src/pages/account/gis-account-page.c:328
+#: ../src/pages/summary/gis-summary-page.c:670
+#: ../src/pages/account/gis-account-page.ui.h:3
+#: ../src/pages/summary/gis-summary-page.ui.h:4
+msgid "Real Name"
+msgstr ""
+
+#: ../src/pages/account/gis-account-page.c:329
+#: ../src/pages/account/gis-account-page.ui.h:4
+msgid "Password"
+msgstr ""
+
+#: ../src/pages/account/gis-account-page.c:330
+#: ../src/pages/account/gis-account-page.ui.h:5
+msgid "Retype Password"
+msgstr ""
+
+#: ../src/pages/goa/gis-goa-page.c:121
+msgid "Add Account"
+msgstr ""
+
+#: ../src/pages/goa/gis-goa-page.c:275 ../src/pages/goa/gis-goa-page.ui.h:2
+msgid "The system's network is inactive"
+msgstr ""
+
+#: ../src/pages/goa/gis-goa-page.c:384 ../src/pages/goa/gis-goa-page.c:468
+msgid "Online Accounts Settings"
+msgstr ""
+
+#: ../src/pages/goa/gis-goa-page.c:387 ../src/pages/goa/gis-goa-page.ui.h:1
+msgid ""
+"Connect your accounts to easily access your email, online calendar, "
+"contacts, documents and photos. Accounts can be added and removed at any "
+"time from the Settings application."
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:157
+msgid "Done setting"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:158
+msgid "All settings have been completed. Do you want to logout?"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:165
+#: ../src/pages/summary/gis-summary-page.c:210
+msgid "_Ok"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:166
+#: ../src/pages/summary/gis-summary-page.c:211
+msgid "_Cancel"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:235
+msgid ""
+"Configuring user's environment\n"
+"Please wait..."
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:303
+msgid "No Use"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:351
+msgid "Unknown"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:414
+msgid ""
+"User's environment configuration is completed.\n"
+"Restart the system after a while..."
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:464
+msgid "User Environment Configuration Error"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:465
+msgid ""
+"Failed to configure user's environment. Do you want to try again after "
+"rebooting the system?"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:516
+msgid "Password Setting Error"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:517
+msgid ""
+"Failed to set password. Do you want to try again after rebooting the system?"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:545
+msgid "Account Creating Error"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:546
+msgid ""
+"Failed to create an account. Do you want to try again after rebooting the "
+"system?"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:663
+#: ../src/pages/summary/gis-summary-page.c:685
+msgid "Setup Complete"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:665
+#: ../src/pages/summary/gis-summary-page.ui.h:1
+msgid "Setup is complete"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:666
+#: ../src/pages/summary/gis-summary-page.ui.h:2
+msgid "OS"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:667
+#: ../src/pages/summary/gis-summary-page.ui.h:6
+msgid "Hostname"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:668
+#: ../src/pages/summary/gis-summary-page.ui.h:5
+msgid "Language"
+msgstr ""
+
+#: ../src/pages/summary/gis-summary-page.c:671
+#: ../src/pages/summary/gis-summary-page.ui.h:7
+msgid "Online Accounts"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:429 ../src/pages/summary/run-su.c:384
+msgid "Authentication failed"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:509
+#, c-format
+msgid "The new password is too short"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:515
+#, c-format
+msgid "The new password is too simple"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:521
+#, c-format
+msgid "The old and new passwords are too similar"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:524
+#, c-format
+msgid "The new password has already been used recently."
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:527
+#, c-format
+msgid "The new password must contain numeric or special characters"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:531
+#, c-format
+msgid "The old and new passwords are the same"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:535
+#, c-format
+msgid "Your password has been changed since you initially authenticated!"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:539
+#, c-format
+msgid "The new password does not contain enough different characters"
+msgstr ""
+
+#: ../src/pages/summary/run-passwd.c:543
+#, c-format
+msgid "Unknown error"
+msgstr ""
+
+#: ../src/pages/eulas/gis-eulas-page.c:215
+#: ../src/pages/eulas/gis-eulas-page.c:304
+msgid "License Agreements"
+msgstr ""
+
+#: ../src/pages/eulas/gis-eulas-page.c:218
+#: ../src/pages/eulas/gis-eulas-page.ui.h:1
+msgid ""
+"I have _agreed to the terms and conditions in this end user license "
+"agreement."
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:333
+msgctxt "Wireless access point"
+msgid "Other…"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:444
+msgid "Wireless - No Use"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:450
+msgid "Wireless - Use"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:651
+msgid "Wired - No Use"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:653
+msgid "Wired - Disconnected"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:659
+msgid "Wired - Connected"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:709
+#: ../src/pages/network/gis-network-page.c:1148
+msgid "Wired - No Device"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:712
+#: ../src/pages/network/gis-network-page.c:1157
+msgid "Wireless - No Device"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:1136
+#: ../src/pages/network/gis-network-page.c:1246
+msgid "Network Settings"
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:1139
+#: ../src/pages/network/gis-network-page.ui.h:1
+msgid ""
+"Connect the system to the network. Connect to the network using LAN or WIFI."
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:1161
+#: ../src/pages/network/gis-network-page.ui.h:2
+msgid ""
+"No network device\n"
+"Please contact the administrator."
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:1164
+#: ../src/pages/network/gis-network-page.ui.h:4
+msgid ""
+"Network information could not be found.\n"
+"Please contact the administrator."
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:1167
+#: ../src/pages/network/gis-network-page.ui.h:6
+msgid ""
+"The system's network is inactive.\n"
+"Please click the button below to enable networking."
+msgstr ""
+
+#: ../src/pages/network/gis-network-page.c:1170
+#: ../src/pages/network/gis-network-page.ui.h:8
+msgid "Enable Networking"
+msgstr ""
+
+#: ../src/pages/summary/splash-window.ui.h:1
+msgid "Please wait..."
+msgstr ""

@@ -283,7 +283,7 @@
         </child>
         <child>
           <object class="GtkLabel" id="online_accounts_text_label">
-            <property name="visible">False</property>
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label" translatable="yes">Online Accounts</property>
             <style>
@@ -297,7 +297,7 @@
         </child>
         <child>
           <object class="GtkLabel">
-            <property name="visible">False</property>
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="label">:</property>
             <style>
@@ -311,7 +311,7 @@
         </child>
         <child>
           <object class="GtkLabel" id="online_accounts_label">
-            <property name="visible">False</property>
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="wrap">True</property>
             <property name="wrap_mode">char</property>

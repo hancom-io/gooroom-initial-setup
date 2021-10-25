@@ -24,7 +24,7 @@ Package: gooroom-initial-setup
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-#gnome-keyring,
+         gnome-keyring,
          adduser,
          gnome-online-accounts (>= 3.25.3)
 Description: Initial Gooroom system setup helper
