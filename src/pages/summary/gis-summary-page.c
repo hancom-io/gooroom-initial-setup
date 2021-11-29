@@ -585,10 +585,8 @@ gis_summary_page_save_data (GisPage *page)
 	GisSummaryPagePrivate *priv = self->priv;
 	GisPageManager *manager = page->manager;
 	static char *modes[] = { "adm", "audio", "bluetooth", "cdrom", "dialout",
-							 "dip", "fax", "floppy", "fuse", "lpadmin",
-							 "netdev", "plugdev", "powerdev", "sambashare",
-							 "scanner", "sudo", "tape", "users", "vboxusers",
-							 "video", NULL };
+							 "dip", "fax", "floppy", "lpadmin", "netdev", "plugdev",
+							 "scanner", "sudo", "tape", "users",  "video", NULL };
 
 	show_splash_window (self);
 

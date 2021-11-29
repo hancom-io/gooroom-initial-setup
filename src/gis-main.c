@@ -105,29 +105,13 @@ init_config_files (void)
 	g_free (dirname);
 	g_dir_close (dir);
 }
-
-int
-main (int argc, char **argv)
+static void
+on_activate (GtkApplication *app, gpointer user_data)
 {
 	GtkCssProvider *provider;
 	GtkWidget *window, *assistant;
 
-	int ret = EXIT_SUCCESS;
-
-	/* Initialize i18n */
-	setlocale (LC_ALL, "");
-	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
-
-	/* init gtk */
-	gtk_init (&argc, &argv);
-
-	init_config_files ();
-	ensure_nm_applet ();
-	gis_ensure_login_keyring ();
-
-	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	window = gtk_application_window_new (app);
 	gtk_window_set_type_hint (GTK_WINDOW (window), GDK_WINDOW_TYPE_HINT_DESKTOP);
 	gtk_window_set_keep_below (GTK_WINDOW (window), TRUE);
 	gtk_window_set_resizable (GTK_WINDOW (window), FALSE);
@@ -163,8 +147,30 @@ main (int argc, char **argv)
                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	g_object_unref (provider);
 
-	gtk_main ();
+}
 
+int
+main (int argc, char **argv)
+{
+	GtkApplication *app;
+
+	int ret = EXIT_SUCCESS;
+
+	/* Initialize i18n */
+	setlocale (LC_ALL, "");
+	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+	textdomain (GETTEXT_PACKAGE);
+
+	init_config_files ();
+	ensure_nm_applet ();
+	gis_ensure_login_keyring ();
+
+	app = gtk_application_new ("kr.gooroom.initial-setup", G_APPLICATION_FLAGS_NONE);
+	g_signal_connect (app, "activate", G_CALLBACK (on_activate), NULL);
+
+	ret = g_application_run (G_APPLICATION (app), argc, argv);
+	g_object_unref (app);
 //	sigterm_cb (GINT_TO_POINTER (FALSE));
 
     return ret;

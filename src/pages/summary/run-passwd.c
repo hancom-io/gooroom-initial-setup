@@ -109,7 +109,7 @@ static void
 free_passwd_resources (PasswdHandler *passwd_handler);
 
 static gboolean
-io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *passwd_handler);
+pw_io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *passwd_handler);
 
 
 /*
@@ -222,7 +222,7 @@ spawn_passwd (PasswdHandler *passwd_handler, GError **error)
         /* Add IO Channel watcher */
         passwd_handler->backend_stdout_watch_id = g_io_add_watch (passwd_handler->backend_stdout,
                                                                   G_IO_IN | G_IO_PRI,
-                                                                  (GIOFunc) io_watch_stdout, passwd_handler);
+                                                                  (GIOFunc) pw_io_watch_stdout, passwd_handler);
 
         /* Add child watcher */
         passwd_handler->backend_child_watch_id = g_child_watch_add (passwd_handler->backend_pid, (GChildWatchFunc) child_watch_cb, passwd_handler);
@@ -326,7 +326,7 @@ free_passwd_resources (PasswdHandler *passwd_handler)
 
 /* Write the first element of queue through channel */
 static void
-io_queue_pop (GQueue *queue, GIOChannel *channel)
+pw_io_queue_pop (GQueue *queue, GIOChannel *channel)
 {
         gchar   *buf;
         gsize   bytes_written;
@@ -350,7 +350,7 @@ io_queue_pop (GQueue *queue, GIOChannel *channel)
 /* Goes through the argument list, checking if one of them occurs in str
  * Returns: TRUE as soon as an element is found to match, FALSE otherwise */
 static gboolean
-is_string_complete (gchar *str, ...)
+pw_is_string_complete (gchar *str, ...)
 {
         va_list ap;
         gchar   *arg;
@@ -378,7 +378,7 @@ is_string_complete (gchar *str, ...)
  * This is where most of the actual IO handling happens.
  */
 static gboolean
-io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *passwd_handler)
+pw_io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *passwd_handler)
 {
         static GString *str = NULL;     /* Persistent buffer */
 
@@ -409,7 +409,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                 case PASSWD_STATE_AUTH:
                         /* Passwd is asking for our current password */
 
-                        if (is_string_complete (str->str, "assword: ", "failure", "wrong", "error", NULL)) {
+                        if (pw_is_string_complete (str->str, "assword: ", "failure", "wrong", "error", NULL)) {
 
                                 if (strstr (str->str, "assword: ") != NULL && strstr (str->str, "incorrect") == NULL) {
                                         /* Authentication successful */
@@ -450,12 +450,12 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                 case PASSWD_STATE_NEW:
                         /* Passwd is asking for our new password */
 
-                        if (is_string_complete (str->str, "assword: ", NULL)) {
+                        if (pw_is_string_complete (str->str, "assword: ", NULL)) {
                                 /* Advance to next state */
                                 passwd_handler->backend_state = PASSWD_STATE_RETYPE;
 
                                 /* Pop retyped password from queue and into IO channel */
-                                io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
+                                pw_io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
 
                                 reinit = TRUE;
                         }
@@ -463,7 +463,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                 case PASSWD_STATE_RETYPE:
                         /* Passwd is asking for our retyped new password */
 
-                        if (is_string_complete (str->str,
+                        if (pw_is_string_complete (str->str,
                                                 "successfully",
                                                 "short",
                                                 "longer",
@@ -568,12 +568,12 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                         break;
                 case PASSWD_STATE_NONE:
                         /* Passwd is not asking for anything yet */
-                        if (is_string_complete (str->str, "assword: ", NULL)) {
+                        if (pw_is_string_complete (str->str, "assword: ", NULL)) {
 
                                 /* If the user does not have a password set,
                                  * passwd will immediately ask for the new password,
                                  * so skip the AUTH phase */
-                                if (is_string_complete (str->str, "new", "New", NULL)) {
+                                if (pw_is_string_complete (str->str, "new", "New", NULL)) {
                                         gchar *pw;
 
                                         passwd_handler->backend_state = PASSWD_STATE_NEW;
@@ -584,14 +584,14 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                                         g_free (pw);
 
                                         /* Pop the IO queue, i.e. send new password */
-                                        io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
+                                        pw_io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
 
                                 } else {
 
                                         passwd_handler->backend_state = PASSWD_STATE_AUTH;
 
                                         /* Pop the IO queue, i.e. send current password */
-                                        io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
+                                        pw_io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
                                 }
 
                                 reinit = TRUE;
@@ -625,7 +625,7 @@ update_password (PasswdHandler *passwd_handler)
         s = g_strdup_printf ("%s\n", passwd_handler->new_password);
 
         g_queue_push_tail (passwd_handler->backend_stdin_queue, s);
-        /* We need to allocate new space because io_queue_pop() g_free()s
+        /* We need to allocate new space because pw_io_queue_pop() g_free()s
          * every element of the queue after it's done */
         g_queue_push_tail (passwd_handler->backend_stdin_queue, g_strdup (s));
 }
@@ -715,11 +715,11 @@ passwd_change_password (PasswdHandler *passwd_handler,
         /* Pop new password through the backend.
          * If user has no password, popping the queue would output current
          * password, while 'passwd' is waiting for the new one. So wait for
-         * io_watch_stdout() to remove current password from the queue,
+         * pw_io_watch_stdout() to remove current password from the queue,
          * and output the new one for us.
          */
         if (passwd_handler->current_password)
-                io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
+                pw_io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
 
         /* Our IO watcher should now handle the rest */
 

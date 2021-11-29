@@ -33,13 +33,15 @@ gooroom_initial_setup_CFLAGS = \
 	$(GTK_CFLAGS) \
 	$(GLIB_CFLAGS) \
 	$(GIO_CFLAGS) \
-	$(LIBSECRET_CFLAGS)
+	$(LIBSECRET_CFLAGS) \
+	$(WEBKIT_CFLAGS)
 
 gooroom_initial_setup_LDADD = \
 	$(GTK_LIBS) \
 	$(GLIB_LIBS) \
 	$(GIO_LIBS) \
 	$(LIBSECRET_LIBS) \
+	$(WEBKIT_LIBS) \
 	pages/language/libgislanguage.la \
 	pages/eulas/libgiseulas.la \
 	pages/network/libgisnetwork.la \
