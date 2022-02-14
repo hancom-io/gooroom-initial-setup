@@ -107,6 +107,28 @@ delete_lightdm_config (void)
 }
 
 static void
+remove_after_checking_file_exists (GisSummaryPage *page, const gchar *username)
+{
+	gchar *cmd = NULL;
+	gchar **argv;
+
+	cmd = g_strdup_printf("/home/.ecryptfs/%s", username);
+	if (g_file_test (cmd, G_FILE_TEST_EXISTS)) {
+		cmd = g_strdup_printf ("sudo /usr/bin/rm -rf %s",cmd);
+		g_spawn_command_line_sync (cmd, NULL, NULL, NULL, NULL);
+	}
+
+	cmd = g_strdup_printf("/home/%s", username);
+	if (g_file_test (cmd, G_FILE_TEST_EXISTS)) {
+		cmd = g_strdup_printf ("sudo /usr/bin/rm -rf %s",cmd);
+		g_spawn_command_line_sync (cmd, NULL, NULL, NULL, NULL);
+	}
+
+	g_free(argv);
+	g_free(cmd);
+}
+
+static void
 delete_account (const char *user)
 {
 	gchar *cmd = NULL;
@@ -117,6 +139,9 @@ delete_account (const char *user)
 			g_warning ("Couldn't delete account: %s", user);
 		}
 	}
+
+	remove_after_checking_file_exists (NULL, user);
+
 	g_free (cmd);
 }
 
@@ -284,6 +309,7 @@ update_online_accounts_info (GisSummaryPage *page)
 
 	if (length == 0) {
 		text = NULL;
+		g_print ("BOYEON: online_accounts is NULL");
 	} else if (length == 1) {
 		text = g_strdup_printf ("%s", (gchar *)g_list_nth_data (online_accounts, 0));
 	} else {
@@ -592,6 +618,7 @@ gis_summary_page_save_data (GisPage *page)
 
 	gis_page_manager_get_user_info (manager, &realname, &username, NULL);
 
+
 	cmd_prefix = "/usr/bin/pkexec /usr/sbin/adduser --force-badname --shell /bin/bash --disabled-login --encrypt-home --gecos";
 
 	if (!realname)
@@ -605,6 +632,7 @@ gis_summary_page_save_data (GisPage *page)
 		cmd = g_strdup_printf ("%s \"%s\" %s", cmd_prefix, username, username);
 	}
 
+	remove_after_checking_file_exists (self, username);
 	g_shell_parse_argv (cmd, NULL, &argv, NULL);
 
 	if (g_spawn_async (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, &pid, NULL)) {

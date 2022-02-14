@@ -6,8 +6,13 @@
   -GtkDialog-button-spacing: 8;
   outline-color: transparent;
   text-shadow: none;
+  font-family: NotoSansCJKkr;
   -gtk-icon-effect: none;
   -gtk-icon-shadow: none; }
+
+window {
+  background-color: #ffffff;
+}
 
 .error-label {
   color: red;
@@ -57,17 +62,11 @@ spinner {
       opacity: 0.2; }
 
 .assistant {
-  border-radius: 16px;
-  border-color: #1c1c1c;
-  background-color: #1c1c1c;
-  box-shadow: 0 2px 8px 3px rgba(0, 0, 0, 0.85); }
+  background-color: #ffffff; }
   .assistant .left-box {
     padding: 40px; }
   .assistant .right-box {
-    padding: 40px;
-    color: #000000;
-    border-radius: 0 16px 16px 0;
-    background-color: #ffffff; }
+    padding: 40px; }
 
 .mode-button {
   color: #000000;
