@@ -76,13 +76,12 @@ init_config_files (void)
 		".xsessionrc",
 		".config/user_agreements",
 		".config/goa-1.0/accounts.conf",
-		".local/share/keyrings",
 		NULL
 	};
 
 	homedir = g_get_home_dir ();
 
-	for (i = 0; i < 4; i++) {
+	for (i = 0; i < 3; i++) {
 		path = g_build_filename (homedir, remove_paths[i], NULL);
 		g_remove (path);
 		g_free (path);
@@ -118,10 +117,14 @@ on_activate (GtkApplication *app, gpointer user_data)
 	gtk_window_set_decorated (GTK_WINDOW (window), FALSE);
 	gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), TRUE);
 	gtk_window_set_skip_pager_hint (GTK_WINDOW (window), TRUE);
-	//gtk_widget_set_app_paintable (window, TRUE);
-	//gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
-	//gtk_container_set_border_width (GTK_CONTAINER (window), 60);
-	gtk_window_maximize (GTK_WINDOW (window));
+
+	if (gdk_screen_width () < 1028) {
+		gtk_widget_set_app_paintable (window, TRUE);
+		gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER);
+		gtk_container_set_border_width (GTK_CONTAINER (window), 60);
+	} else {
+		gtk_window_maximize (GTK_WINDOW (window));
+	}
 
 	GdkScreen *screen = gtk_window_get_screen (GTK_WINDOW (window));
 	if (gdk_screen_is_composited (screen)) {

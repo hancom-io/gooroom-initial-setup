@@ -309,7 +309,6 @@ update_online_accounts_info (GisSummaryPage *page)
 
 	if (length == 0) {
 		text = NULL;
-		g_print ("BOYEON: online_accounts is NULL");
 	} else if (length == 1) {
 		text = g_strdup_printf ("%s", (gchar *)g_list_nth_data (online_accounts, 0));
 	} else {
@@ -429,7 +428,9 @@ update_hostname_info (GisSummaryPage *page)
 static void
 copy_worker_done_cb (GPid pid, gint status, gpointer user_data)
 {
-	const gchar *message;
+	const gchar *message, *title;
+	GtkWidget *dialog, *toplevel;
+	guint res;
 	GisSummaryPage *self = GIS_SUMMARY_PAGE (user_data);
 
 	g_spawn_close_pid (pid);
@@ -437,10 +438,34 @@ copy_worker_done_cb (GPid pid, gint status, gpointer user_data)
 	/* delete /etc/lightdm/lightdm.conf.d/90_gooroom-initial-setup.conf */
 	delete_lightdm_config ();
 
-	message = _("User's environment configuration is completed.\nRestart the system after a while...");
-	splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), message);
+	//message = _("User's environment configuration is completed.\nRestart the system after a while...");
+	//splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), message);
 
-	g_timeout_add (3000, (GSourceFunc)system_logout_cb, self);
+	//g_timeout_add (3000, (GSourceFunc)system_logout_cb, self);
+
+	title = _("Done Settings");
+	message = _("User's environment configuration is completed.\nDo you want to restart?");
+	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+
+	dialog = gis_message_dialog_new (GTK_WINDOW (toplevel),
+                                     "dialog-warning-symbolic.symbolic",
+                                     title, message);
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+							_("_Ok"), GTK_RESPONSE_OK,
+							_("_Cancel"), GTK_RESPONSE_CANCEL,
+							NULL);
+	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+
+	if (res == GTK_RESPONSE_OK) {
+		const gchar *loading;
+		loading = _("Restart the system after a while...");
+		splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), loading);
+		g_timeout_add (3000, (GSourceFunc)system_restart_cb, self);
+
+	}
 }
 
 static gboolean

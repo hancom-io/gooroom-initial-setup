@@ -38,6 +38,7 @@
 
 
 struct _GisAssistantPrivate {
+	GtkWidget *right;
 	GtkWidget *stack;
 	GtkWidget *done;
 	GtkWidget *forward;
@@ -342,7 +343,11 @@ gis_assistant_init (GisAssistant *assistant)
 
 	gis_assistant_ui_setup (assistant);
 
+	if (gdk_screen_width() < 1028)
+		gtk_widget_set_size_request (GTK_WIDGET (priv->right), 500, 500);
+
 	priv->manager = gis_page_manager_new ();
+
 
 	page_data = page_table;
 	for (; page_data->page_id != NULL; ++page_data) {
@@ -377,6 +382,7 @@ gis_assistant_class_init (GisAssistantClass *klass)
 	gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass),
                                                  "/kr/gooroom/initial-setup/gis-assistant.ui");
 
+	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisAssistant, right);
 	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisAssistant, stack);
 	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisAssistant, done);
 	gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisAssistant, forward);
