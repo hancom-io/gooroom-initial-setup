@@ -1,3 +1,11 @@
+gooroom-initial-setup (0.1.1+grm3u1+han3u1) unstable; urgency=medium
+
+  [ boyeon.choi ]
+  * [2bd1db1b] Hancom Gooroom 3.0 Initialization
+  * [ae5085e3] Flexible window size to 800*600
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Fri, 11 Mar 2022 20:40:41 +0900
+
 gooroom-initial-setup (0.1.1+grm3u1) unstable; urgency=medium
 
   [ cjheo ]
