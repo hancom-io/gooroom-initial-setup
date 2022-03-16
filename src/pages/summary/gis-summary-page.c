@@ -432,6 +432,7 @@ copy_worker_done_cb (GPid pid, gint status, gpointer user_data)
 	GtkWidget *dialog, *toplevel;
 	guint res;
 	GisSummaryPage *self = GIS_SUMMARY_PAGE (user_data);
+	GisSummaryPagePrivate *priv = self->priv;
 
 	g_spawn_close_pid (pid);
 
@@ -450,21 +451,31 @@ copy_worker_done_cb (GPid pid, gint status, gpointer user_data)
 	dialog = gis_message_dialog_new (GTK_WINDOW (toplevel),
                                      "dialog-warning-symbolic.symbolic",
                                      title, message);
-	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-							_("_Ok"), GTK_RESPONSE_OK,
-							_("_Cancel"), GTK_RESPONSE_CANCEL,
-							NULL);
+	gtk_dialog_add_button (GTK_DIALOG (dialog),
+							_("_Ok"), GTK_RESPONSE_OK);
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
 
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 
 	if (res == GTK_RESPONSE_OK) {
-		const gchar *loading;
+		const gchar *loading, *label;
 		loading = _("Restart the system after a while...");
 		splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), loading);
-		g_timeout_add (3000, (GSourceFunc)system_restart_cb, self);
 
+		label = g_strdup (gtk_label_get_text (GTK_LABEL (priv->online_accounts_label)));
+		if (g_strcmp0 (label, _("No Use")) == 0) {
+			gchar *cmd = NULL;
+			gchar **argv;
+			cmd = g_strdup_printf ("/usr/bin/pkexec apt purge gnome-keyring -y" );
+			g_shell_parse_argv (cmd, NULL, &argv, NULL);
+			if (g_spawn_async (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, NULL, NULL)) {
+				splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), "Do not remove gnome-keyring");
+			}
+			g_free (cmd);
+			g_strfreev (argv);
+		}
+		g_timeout_add (3000, (GSourceFunc)system_restart_cb, self);
 	}
 }
 
