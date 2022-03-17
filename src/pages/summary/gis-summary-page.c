@@ -459,22 +459,10 @@ copy_worker_done_cb (GPid pid, gint status, gpointer user_data)
 	gtk_widget_destroy (dialog);
 
 	if (res == GTK_RESPONSE_OK) {
-		const gchar *loading, *label;
+		const gchar *loading;
 		loading = _("Restart the system after a while...");
 		splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), loading);
 
-		label = g_strdup (gtk_label_get_text (GTK_LABEL (priv->online_accounts_label)));
-		if (g_strcmp0 (label, _("No Use")) == 0) {
-			gchar *cmd = NULL;
-			gchar **argv;
-			cmd = g_strdup_printf ("/usr/bin/pkexec apt purge gnome-keyring -y" );
-			g_shell_parse_argv (cmd, NULL, &argv, NULL);
-			if (g_spawn_async (NULL, argv, NULL, G_SPAWN_DO_NOT_REAP_CHILD, NULL, NULL, NULL, NULL)) {
-				splash_window_set_message_label (SPLASH_WINDOW (self->priv->splash), "Do not remove gnome-keyring");
-			}
-			g_free (cmd);
-			g_strfreev (argv);
-		}
 		g_timeout_add (3000, (GSourceFunc)system_restart_cb, self);
 	}
 }
