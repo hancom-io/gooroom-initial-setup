@@ -339,7 +339,7 @@ msgstr "설정 완료"
 #: ../src/pages/summary/gis-summary-page.c:716
 #: ../src/pages/summary/gis-summary-page.ui.h:1
 msgid "Setup is complete"
-msgstr "구름OS 로그인 준비를 마쳤습니다."
+msgstr "한컴구름의 로그인 준비를 마쳤습니다."
 
 #: ../src/pages/summary/gis-summary-page.c:717
 #: ../src/pages/summary/gis-summary-page.ui.h:2

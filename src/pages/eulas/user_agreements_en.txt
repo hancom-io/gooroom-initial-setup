@@ -1,7 +1,7 @@
-Gooroom platform user information consent
+Hancom Gooroom user information consent
 
-Users may use the Gooroom platform by “agreeing” to the terms below, otherwise use is restricted.
-The information set at the first boot is used to run each application and is not used for any other purpose. The Gooroom platform is protected by "encrypting user data" and user information is also protected. The saved user information is as follows.
+Users may use the Hancom Gooroom by “agreeing” to the terms below, otherwise use is restricted.
+The information set at the first boot is used to run each application and is not used for any other purpose. The Hancom Gooroom is protected by "encrypting user data" and user information is also protected. The saved user information is as follows.
 
 Login account information
 Network connection information
