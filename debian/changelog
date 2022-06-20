@@ -1,3 +1,10 @@
+gooroom-initial-setup (0.1.1+grm3u1+han3u4) unstable; urgency=medium
+
+  [ boyeon.choi ]
+  * [f284cdb6] Solved the issue of sudo authority & Fixed 155
+
+ -- Gooroom Autobuilder <jenkins@gooroom.kr>  Mon, 20 Jun 2022 16:40:26 +0900
+
 gooroom-initial-setup (0.1.1+grm3u1+han3u3) unstable; urgency=medium
 
   [ boyeon.choi ]
